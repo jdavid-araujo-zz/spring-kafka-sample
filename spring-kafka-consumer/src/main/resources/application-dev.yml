@@ -1,0 +1,17 @@
+server:
+  port: 8089
+
+kafka:
+  consumer:
+    bootstrap-servers: localhost:9092
+    key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+    value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+    group-id: library-events-listener-group
+  properties:
+    schema:
+      registry:
+        url: http://localhost:8001/api/schema-registry
+
+customer:
+  topic: customer-topic
+  group-id: customer-group-id

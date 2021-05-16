@@ -1,0 +1,22 @@
+kafka:
+  producer:
+    bootstrap-servers: localhost:9092
+    key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+    value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    properties:
+      acks: all
+      retries: 10
+      retry.backoff.ms: 1000
+
+      #  auto:
+      #    offset:
+      #     reset: earliest
+  properties:
+    schema:
+      registry:
+        url: http://localhost:8001/api/schema-registry
+  admin:
+    properties:
+      bootstrap.servers: localhost:9092
+
+customer-topic: customer-topic

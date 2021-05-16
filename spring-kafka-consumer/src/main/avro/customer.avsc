@@ -1,0 +1,15 @@
+{
+  "name": "Customer1",
+  "type": "record",
+  "namespace": "io.confluent.develope",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    }
+  ]
+}
