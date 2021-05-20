@@ -4,7 +4,6 @@ import com.david.springkafkaconsumer.kafka.exceptions.CustomerKafkaConsumerError
 import io.confluent.develope.Customer1;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.LongDeserializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -31,11 +30,11 @@ public class KafkaConsumerConfig {
     @Value("${kafka.consumer.bootstrap-servers}")
     private String bootstrapServers;
 
-    private final static Integer KAFKA_CONSUMER_MAX_RETRY_POLICY = 3;
+    private final Integer KAFKA_CONSUMER_MAX_RETRY_POLICY = 3;
 
-    private final static Long KAFKA_CONSUMER_RETRY_BACK_OFF_PERIOD = 1000L;
+    private final Long KAFKA_CONSUMER_RETRY_BACK_OFF_PERIOD = 1000L;
 
-    private final static Integer KAFKA_CONSUMER_CONCURRENCY = 3;
+    private final Integer KAFKA_CONSUMER_CONCURRENCY = 3;
 
     @Bean
     public Map<String, Object> consumerConfigs() {

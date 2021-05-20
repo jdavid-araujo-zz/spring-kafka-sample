@@ -1,6 +1,5 @@
 package com.david.springkafkaconsumer.kafka;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -13,7 +12,7 @@ import io.confluent.develope.Customer1;
 public class CustomerEventsConsumer {
 
     @KafkaListener(topics = "${customer.topic}", groupId = "${customer.group-id}")
-    public void onMessage(ConsumerRecord<Long,Customer1> consumerRecord) throws JsonProcessingException {
+    public void onMessage(ConsumerRecord<Long,Customer1> consumerRecord)  {
 
         log.info("ConsumerRecord : {} ", consumerRecord );
     }

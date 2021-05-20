@@ -17,6 +17,6 @@ server:
 
 customer:
   topic: customer-topic
-  group:
-    id: customer-group-id
+  group-id: customer-group-id
+
 

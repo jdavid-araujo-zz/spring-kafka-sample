@@ -4,7 +4,7 @@ server:
 kafka:
   consumer:
     bootstrap-servers: localhost:9092
-    key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+    key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
     value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
     group-id: library-events-listener-group
   properties:

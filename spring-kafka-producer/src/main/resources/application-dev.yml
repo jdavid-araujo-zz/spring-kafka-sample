@@ -19,4 +19,5 @@ kafka:
     properties:
       bootstrap.servers: localhost:9092
 
-customer-topic: customer-topic
+customer:
+  topic: customer-topic

@@ -25,7 +25,7 @@ public class CustomerSender {
     @Autowired
     KafkaTemplate<Long, Customer1> kafkaTemplate;
 
-    @Value("${customer-topic}")
+    @Value("${customer.topic}")
     private String topic;
 
     public void sendCustomerEvent(Customer1 customer) {
