@@ -14,7 +14,6 @@ spring:
 server:
   port: 8089
 
-
 customer:
   topic: customer-topic
   group-id: customer-group-id

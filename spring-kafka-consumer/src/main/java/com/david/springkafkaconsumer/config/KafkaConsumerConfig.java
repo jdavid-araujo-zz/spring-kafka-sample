@@ -1,6 +1,7 @@
 package com.david.springkafkaconsumer.config;
 
 import com.david.springkafkaconsumer.kafka.exceptions.CustomerKafkaConsumerErrorHandler;
+import com.david.springkafkaconsumer.kafka.exceptions.CustomerKafkaConsumerRecovery;
 import io.confluent.develope.Customer1;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -23,7 +24,7 @@ import org.springframework.retry.support.RetryTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-@Profile("dev")
+
 @Configuration
 public class KafkaConsumerConfig {
 
@@ -36,6 +37,7 @@ public class KafkaConsumerConfig {
 
     private final Integer KAFKA_CONSUMER_CONCURRENCY = 3;
 
+    @Profile("dev")
     @Bean
     public Map<String, Object> consumerConfigs() {
         Map<String, Object> props = new HashMap<>();
@@ -53,6 +55,7 @@ public class KafkaConsumerConfig {
         return props;
     }
 
+    @Profile("dev")
     @Bean
     public ConsumerFactory<Long, Customer1> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
@@ -67,6 +70,7 @@ public class KafkaConsumerConfig {
         factory.setConcurrency(KAFKA_CONSUMER_CONCURRENCY);
         factory.setRetryTemplate(retryTemplate());
         factory.setErrorHandler(new CustomerKafkaConsumerErrorHandler());
+        factory.setRecoveryCallback(new CustomerKafkaConsumerRecovery());
 
         return factory;
     }
