@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+@Profile("dev")
 @Configuration
 public class KafkaConsumerConfig {
 
@@ -37,7 +38,6 @@ public class KafkaConsumerConfig {
 
     private final Integer KAFKA_CONSUMER_CONCURRENCY = 3;
 
-    @Profile("dev")
     @Bean
     public Map<String, Object> consumerConfigs() {
         Map<String, Object> props = new HashMap<>();
@@ -55,7 +55,6 @@ public class KafkaConsumerConfig {
         return props;
     }
 
-    @Profile("dev")
     @Bean
     public ConsumerFactory<Long, Customer1> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());

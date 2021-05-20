@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
-import io.confluent.develope.Customer1;
+import io.confluent.develope.CustomerAVRO;
 
 import java.util.List;
 
@@ -23,34 +23,34 @@ public class CustomerSender {
     private static final Logger log = LoggerFactory.getLogger(CustomerSender.class);
 
     @Autowired
-    KafkaTemplate<Long, Customer1> kafkaTemplate;
+    KafkaTemplate<Long, CustomerAVRO> kafkaTemplate;
 
     @Value("${customer.topic}")
     private String topic;
 
-    public void sendCustomerEvent(Customer1 customer) {
+    public void sendCustomerEvent(CustomerAVRO customer) {
         final Long key = customer.getId();
 
-        ProducerRecord<Long,Customer1> producerRecord = buildProducerRecord(key, customer, topic);
+        ProducerRecord<Long,CustomerAVRO> producerRecord = buildProducerRecord(key, customer, topic);
 
 
-        ListenableFuture<SendResult<Long, Customer1>> future =
+        ListenableFuture<SendResult<Long, CustomerAVRO>> future =
                 kafkaTemplate.send(producerRecord);
 
-        future.addCallback(new ListenableFutureCallback<SendResult<Long, Customer1>>() {
+        future.addCallback(new ListenableFutureCallback<SendResult<Long, CustomerAVRO>>() {
             @Override
             public void onFailure(Throwable ex) {
                 CustomerSender.this.handleFailure( ex);
             }
 
             @Override
-            public void onSuccess(SendResult<Long, Customer1> result) {
+            public void onSuccess(SendResult<Long, CustomerAVRO> result) {
                 CustomerSender.this.handleSuccess(result);
             }
         });
     }
 
-    private ProducerRecord<Long, Customer1> buildProducerRecord(Long key, Customer1 value, String topic) {
+    private ProducerRecord<Long, CustomerAVRO> buildProducerRecord(Long key, CustomerAVRO value, String topic) {
 
 
         List<Header> recordHeaders = List.of(new RecordHeader("event-source", "scanner".getBytes()));
@@ -68,7 +68,7 @@ public class CustomerSender {
         }
     }
 
-    private void handleSuccess(SendResult<Long, Customer1> result) {
+    private void handleSuccess(SendResult<Long, CustomerAVRO> result) {
         log.info("Message Sent SuccessFully for the result : }", result.toString());
     }
 }

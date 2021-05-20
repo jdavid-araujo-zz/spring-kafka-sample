@@ -1,5 +1,5 @@
 {
-  "name": "Customer1",
+  "name": "CustomerAVRO",
   "type": "record",
   "namespace": "io.confluent.develope",
   "fields": [

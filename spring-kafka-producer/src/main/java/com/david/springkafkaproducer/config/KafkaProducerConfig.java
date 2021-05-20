@@ -1,6 +1,6 @@
 package com.david.springkafkaproducer.config;
 
-import io.confluent.develope.Customer1;
+import io.confluent.develope.CustomerAVRO;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.LongSerializer;
@@ -51,12 +51,12 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<Long, Customer1> producerFactory() {
+    public ProducerFactory<Long, CustomerAVRO> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerDefaultConfiguration());
     }
 
     @Bean
-    public KafkaTemplate<Long, Customer1> kafkaTemplate() {
+    public KafkaTemplate<Long, CustomerAVRO> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 
